@@ -13,8 +13,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # ------------------ Load Data (unchanged) ------------------
-training = pd.read_csv(r"C:\Users\Hi\docai\AI-Health-Chatbot-Web-integration\Training.csv")
-testing = pd.read_csv(r"C:\Users\Hi\docai\AI-Health-Chatbot-Web-integration\Testing.csv")
+training = pd.read_csv("Training.csv")
+testing = pd.read_csv("Testing.csv")
 training.columns = training.columns.str.replace(r"\.\d+$", "", regex=True)
 testing.columns  = testing.columns.str.replace(r"\.\d+$", "", regex=True)
 training = training.loc[:, ~training.columns.duplicated()]
@@ -33,18 +33,18 @@ severityDictionary, description_list, precautionDictionary = {}, {}, {}
 symptoms_dict = {symptom: idx for idx, symptom in enumerate(x)}
 
 def getDescription():
-    with open(r"C:\Users\Hi\docai\AI-Health-Chatbot-Web-integration\symptom_Description.csv") as csv_file:
+    with open("symptom_Description.csv") as csv_file:
         for row in csv.reader(csv_file):
             description_list[row[0]] = row[1]
 
 def getSeverityDict():
-    with open (r"C:\Users\Hi\docai\AI-Health-Chatbot-Web-integration\symptom_severity.csv") as csv_file:
+    with open ("symptom_severity.csv") as csv_file:
         for row in csv.reader(csv_file):
             try: severityDictionary[row[0]] = int(row[1])
             except: pass
 
 def getprecautionDict():
-    with open(r"C:\Users\Hi\docai\AI-Health-Chatbot-Web-integration\symptom_precaution.csv") as csv_file:
+    with open("symptom_precaution.csv") as csv_file:
         for row in csv.reader(csv_file):
             precautionDictionary[row[0]] = [row[1], row[2], row[3], row[4]]
 
