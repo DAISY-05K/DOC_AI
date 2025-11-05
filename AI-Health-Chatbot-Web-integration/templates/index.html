@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOC_AI Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  
+  <!-- Phone-like chat container -->
+  <div class="phone-frame">
+    <div class="chat-header">DOC_AI Chatbot</div>
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your symptoms..." autocomplete="off">
+      <!----adding disclaimer---->
+
+<button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <div class="Support-link">
+    <a href="Support.html">🏠 Support & Contact</a>
+  </div>
+  <!-----adding About Us Page link------>
+  <div class="about-link">
+    <a href="about.html">ℹ️ About Us</a>
+  </div>
+  
+ <div class="disclaimer">
+  <p><strong>⚠️ Disclaimer:</strong> The information provided by DOC_AI is for educational purposes only and is not a substitute for professional medical advice.<br>
+  Always consult a qualified healthcare provider with any questions you may have regarding a medical condition.</p>
+</div>
+
+</body>
+</html>
+<style>
+  .Support-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+  }
+  .Support-link a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  .Support-link a:hover {
+    text-decoration: underline;
+  }
+  .about-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+  }
+  .about-link a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  .about-link a:hover {
+    text-decoration: underline;
+  }
+  .disclaimer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+  }
+</style>
