@@ -218,15 +218,15 @@ def chat():
     elif step == 'name':
         session['name'] = user_msg
         session['step'] = 'age'
-        return jsonify(reply=f"➡️ Please {session['name']} enter your age:")
+        return jsonify(reply=f"🥼 Please {session['name']} enter your age:")
     elif step == 'age':
         session['age'] = user_msg
         session['step'] = 'gender'
-        return jsonify(reply=f"➡️ What is your gender, {session['name']}?\n (Male/Female/Other):")
+        return jsonify(reply=f"🥼 What is your gender, ?\n (Male/Female/Other):")
     elif step == 'gender':
         session['gender'] = user_msg
         session['step'] = 'symptoms'
-        return jsonify(reply=f"➡️ Please {session['name']} Describe your symptoms in a sentence, :")
+        return jsonify(reply=f"🥼 Please {session['name']} Describe your symptoms in a sentence, :")
     elif step == 'symptoms':
         symptoms_list = extract_symptoms(user_msg, cols)
         if not symptoms_list:
@@ -239,19 +239,19 @@ def chat():
     elif step == 'days':
         session['days'] = user_msg
         session['step'] = 'severity'
-        return jsonify(reply=f"➡️ Sorry, to hear that {session['name']}, on a scale of 1–10, how severe is your condition?")
+        return jsonify(reply=f"🥼 Sorry, to hear about that {session['name']}, on a scale of 1–10, how severe is your condition?")
     elif step == 'severity':
         session['severity'] = user_msg
         session['step'] = 'preexist'
-        return jsonify(reply="➡️ Do you have any pre-existing conditions ?")
+        return jsonify(reply="🥼 Do you have any pre-existing conditions ?")
     elif step == 'preexist':
         session['preexist'] = user_msg
         session['step'] = 'lifestyle'
-        return jsonify(reply="➡️ Do you smoke, drink alcohol, or have irregular sleep?")
+        return jsonify(reply="🥼 Do you smoke, drink alcohol, or have irregular sleep?")
     elif step == 'lifestyle':
         session['lifestyle'] = user_msg
         session['step'] = 'family'
-        return jsonify(reply="➡️ Any family history of similar illness?")
+        return jsonify(reply="🥼 Any family history of similar illness?")
     elif step == 'family':
         session['family'] = user_msg
         # guided disease-specific questions
@@ -280,7 +280,7 @@ def ask_next_symptom():
     if i < min(8, len(ds)):
         sym = ds[i]
         session['ask_index'] += 1
-        return jsonify(reply=f"➡️ Do you have severe {sym.replace('_',' ')}? (yes/no):")
+        return jsonify(reply=f"🥼 Do you have severe {sym.replace('_',' ')}? (yes/no):")
     else:
         session['step'] = 'final'
         return final_prediction()

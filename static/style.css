@@ -5,17 +5,17 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
 
-  /* Keep chat box on the RIGHT */
+  /* Center chat box */
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;   /* changed from flex-end */
   align-items: center;
   height: 100vh;
 }
 
 /* ---------- Larger Phone-like Frame ---------- */
 .phone-frame {
-  width: 520px;          /* wider chat box */
-  height: 820px;         /* taller chat box */
+  width: 800px;          
+  height: 650px;         
   background: #fff;
   border-radius: 32px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   backdrop-filter: blur(5px);
-  margin-right: 40px;    /* gap from right edge */
+  margin-right: 0;       /* removed right offset since it's centered now */
 }
 
 /* ---------- Header ---------- */
@@ -39,14 +39,17 @@ body {
 
 /* ---------- Chat Area ---------- */
 .chat-box {
-  flex: 1;
-  padding: 30px;
+  flex: 0 0 480px;         /* fixed height (shorter) */
+  width: 100%;             /* makes it fill the new wider frame */
+  padding: 25px 40px;      /* slightly wider padding */
   overflow-y: auto;
   background: #f7f7f7;
   display: flex;
   flex-direction: column;
   font-size: 16px;
+  box-sizing: border-box;
 }
+
 
 /* ---------- Messages ---------- */
 .message {
@@ -129,59 +132,65 @@ body {
   background: rgba(0,0,0,0.2);
   border-radius: 3px;
 }
+
+/* ---------- Disclaimer ---------- */
 .disclaimer {
   position: fixed;
-  bottom: 0;                     /* Fixed to the bottom edge */
-  left: 50%;                     /* Center horizontally */
-  transform: translateX(-150%);   /* Perfect centering */
-  width: auto;                   /* Adjusts to content */
-  max-width: 600px;              /* Limit width */
+  bottom: 0;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);  /* keep centered */
+  width: 200%;
+  max-width: 800px;
   background-color: rgba(250, 248, 242, 0.98);
   color: #e73306ff;
   text-align: center;
-  font-size: 13px;               /* Smaller font */
+  font-size: 12px;        /* slightly smaller text */
   font-weight: 500;
-  padding: 8px 18px;             /* Compact padding */
+  padding: 4px 12px;      /* smaller padding reduces height */
   border-top: 1px solid #ffeeba;
-  border-radius: 10px 10px 0 0;  /* Rounded top corners */
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
-  z-index: 1000;                 /* Always on top */
+  border-radius: 8px 8px 0 0;  /* subtle rounded edges */
+  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  margin-top: 100px;
 }
 
 .disclaimer strong {
-  color: #d60d0d; /* Emphasis color */
+  color: #d60d0d;
 }
 
 
+/* ---------- Links ---------- */
+.Support-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 18px;
+}
+.Support-link a {
+  text-decoration: none;
+  color: #007BFF;
+}
+.Support-link a:hover {
+  text-decoration: underline;
+}
 
-  .Support-link {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 18px;
-  }
-  .Support-link a {
-    text-decoration: none;
-    color: #007BFF;
-  }
-  .Support-link a:hover {
-    text-decoration: underline;
-  }
-  .about-link {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 18px;
-  }
-  .about-link a {
-    text-decoration: none;
-    color: #007BFF;
-  }
-  .about-link a:hover {
-    text-decoration: underline;
-  }
- 
-  @media (max-width: 600px) {
+.about-link {
+  position: fixed;
+  top: 20px;
+  right: 80px; /* moved closer to support link */
+  font-size: 18px;
+}
+.about-link a {
+  text-decoration: none;
+  color: #007BFF;
+}
+.about-link a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
   body {
     font-size: 14px;
   }
@@ -198,8 +207,6 @@ body {
     margin: 10px auto;
   }
 
- 
-
   button {
     width: 100%;
     font-size: 14px;
@@ -207,7 +214,7 @@ body {
   }
 }
 
-/* ---------- 💻 Tablets (min-width: 601px) and (max-width: 1024px) ---------- */
+/* ---------- 💻 Tablets ---------- */
 @media (min-width: 601px) and (max-width: 1024px) {
   body {
     font-size: 15px;
@@ -228,7 +235,7 @@ body {
   }
 }
 
-/* ---------- 🖥️ Large Screens (min-width: 1025px) ---------- */
+/* ---------- 🖥️ Large Screens ---------- */
 @media (min-width: 1025px) {
   body {
     font-size: 16px;
@@ -242,3 +249,4 @@ body {
     font-size: 16px;
   }
 }
+
