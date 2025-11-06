@@ -40,7 +40,7 @@ body {
 /* ---------- Chat Area ---------- */
 .chat-box {
   flex: 1;
-  padding: 18px;
+  padding: 30px;
   overflow-y: auto;
   background: #f7f7f7;
   display: flex;
@@ -130,21 +130,115 @@ body {
   border-radius: 3px;
 }
 .disclaimer {
-    position: fixed;          
-    bottom: 0;               
-    left: 0;
-    width: 100%;              
-    background-color: rgba(250, 248, 242, 1); 
-    color: #e73306ff;          
-    text-align: center;       
-    font-size: 15px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-top: 1px solid #ffeeba;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-    z-index: 1000;            
+  position: fixed;
+  bottom: 0;                     /* Fixed to the bottom edge */
+  left: 50%;                     /* Center horizontally */
+  transform: translateX(-150%);   /* Perfect centering */
+  width: auto;                   /* Adjusts to content */
+  max-width: 600px;              /* Limit width */
+  background-color: rgba(250, 248, 242, 0.98);
+  color: #e73306ff;
+  text-align: center;
+  font-size: 13px;               /* Smaller font */
+  font-weight: 500;
+  padding: 8px 18px;             /* Compact padding */
+  border-top: 1px solid #ffeeba;
+  border-radius: 10px 10px 0 0;  /* Rounded top corners */
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;                 /* Always on top */
+}
+
+.disclaimer strong {
+  color: #d60d0d; /* Emphasis color */
+}
+
+
+
+  .Support-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+  }
+  .Support-link a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  .Support-link a:hover {
+    text-decoration: underline;
+  }
+  .about-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 18px;
+  }
+  .about-link a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  .about-link a:hover {
+    text-decoration: underline;
+  }
+ 
+  @media (max-width: 600px) {
+  body {
+    font-size: 14px;
   }
 
-  .disclaimer strong {
-  color: #d60d0d; /* Red for emphasis on warning */
+  .container {
+    width: 95%;
+    padding: 10px;
   }
+
+  .about-link, .Support-link {
+    position: static;
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+ 
+
+  button {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* ---------- 💻 Tablets (min-width: 601px) and (max-width: 1024px) ---------- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+
+  .disclaimer {
+    font-size: 12px;
+    max-width: 80%;
+  }
+}
+
+/* ---------- 🖥️ Large Screens (min-width: 1025px) ---------- */
+@media (min-width: 1025px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    width: 85%;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}

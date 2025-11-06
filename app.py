@@ -54,21 +54,94 @@ symptom_synonyms = {
     "stomach ache": "stomach_pain","belly pain": "stomach_pain","tummy pain": "stomach_pain","abdominal pain": "stomach_pain","gas pain": "stomach_pain",
     "cramps": "stomach_pain","stomach cramps": "stomach_pain","bloating": "stomach_pain","nausea": "nausea","vomiting": "vomiting","throwing up": "vomiting",
     "feeling sick": "nausea","diarrhea": "diarrhea","loose motion": "diarrhea","motions": "diarrhea","loose stool": "diarrhea","constipation": "constipation",
-    "difficulty passing stool": "constipation","heartburn": "acid_reflux","acid reflux": "acid_reflux","indigestion": "acid_reflux","high temperature": "fever",
-    "temperature": "fever","feaver": "fever","feverish": "fever","chills": "chills","cold": "chills","flu": "influenza","influenza": "influenza","cough": "cough",
-    "coughing": "cough","dry cough": "cough","wet cough": "cough","throat pain": "sore_throat","sore throat": "sore_throat","throat irritation": "sore_throat",
-    "breathing issue": "breathlessness","shortness of breath": "breathlessness","difficulty breathing": "breathlessness","wheezing": "breathlessness","runny nose": "runny_nose",
-    "stuffy nose": "nasal_congestion","blocked nose": "nasal_congestion","sneezing": "sneezing","sinus pain": "sinusitis","sinus pressure": "sinusitis","nose bleed": "nosebleed",
-    "body ache": "muscle_pain","body pain": "muscle_pain","muscle ache": "muscle_pain","joint pain": "joint_pain","leg pain": "joint_pain","arm pain": "joint_pain",
-    "back pain": "back_pain","lower back pain": "back_pain","neck pain": "neck_pain","fatigue": "fatigue","tiredness": "fatigue","weakness": "fatigue","diziness": "dizziness",
-    "lightheaded": "dizziness","fainting": "fainting","loss of consciousness": "fainting","sweating": "sweating","shivering": "chills","headache": "headache",
-    "migraine": "headache","head pain": "headache","eye pain": "eye_pain","eye strain": "eye_pain","blurred vision": "blurred_vision","double vision": "blurred_vision",
-    "drowsiness": "drowsiness","confusion": "confusion","memory loss": "memory_loss","rash": "skin_rash","itching": "itching","skin irritation": "itching","hives": "skin_rash",
-    "acne": "acne","pimples": "acne","swelling": "swelling","bruising": "bruising","bleeding": "bleeding","cuts": "wound","wound": "wound","burn": "burn","sunburn": "burn",
-    "frequent urination": "urinary_frequency","burning urination": "urinary_pain","painful urination": "urinary_pain","blood in urine": "hematuria","menstrual pain": "menstrual_cramps",
-    "period cramps": "menstrual_cramps","missed period": "amenorrhea","vaginal discharge": "vaginal_discharge","loss of appetite": "loss_of_appetite","poor appetite": "loss_of_appetite",
-    "weight loss": "weight_loss","weight gain": "weight_gain","anxiety": "anxiety","stress": "stress","insomnia": "insomnia","trouble sleeping": "insomnia","depression": "depression"
+    "difficulty passing stool": "constipation","heartburn": "acid_reflux","acid reflux": "acid_reflux","indigestion": "acid_reflux",
+    "high temperature": "fever",
+    "temperature": "fever",
+    "feaver": "fever",
+    "feverish": "fever",
+    "chills": "chills",
+    "cold": "chills",
+    "flu": "influenza",
+    "influenza": "influenza",
+    "cough": "cough",
+    "coughing": "cough",
+    "dry cough": "cough",
+    "wet cough": "cough",
+    "throat pain": "sore_throat",
+    "sore throat": "sore_throat",
+    "throat irritation": "sore_throat",
+    "breathing issue": "breathlessness",
+    "shortness of breath": "breathlessness",
+    "difficulty breathing": "breathlessness",
+    "wheezing": "breathlessness",
+    "runny nose": "runny_nose",
+    "stuffy nose": "nasal_congestion",
+    "blocked nose": "nasal_congestion",
+    "sneezing": "sneezing",
+    "sinus pain": "sinusitis",
+    "sinus pressure": "sinusitis",
+    "nose bleed": "nosebleed",
+    "body ache": "muscle_pain",
+    "body pain": "muscle_pain",
+    "muscle ache": "muscle_pain",
+    "joint pain": "joint_pain",
+    "leg pain": "joint_pain",
+    "arm pain": "joint_pain",
+    "back pain": "back_pain",
+    "lower back pain": "back_pain",
+    "neck pain": "neck_pain",
+    "fatigue": "fatigue",
+    "tiredness": "fatigue",
+    "weakness": "fatigue",
+    "diziness": "dizziness",
+    "lightheaded": "dizziness",
+    "fainting": "fainting",
+    "loss of consciousness": "fainting",
+    "sweating": "sweating",
+    "shivering": "chills",
+    "headache": "headache",
+    "migraine": "headache",
+    "head pain": "headache",
+    "eye pain": "eye_pain",
+    "eye strain": "eye_pain",
+    "blurred vision": "blurred_vision",
+    "double vision": "blurred_vision",
+    "drowsiness": "drowsiness",
+    "confusion": "confusion",
+    "memory loss": "memory_loss",
+    "rash": "skin_rash",
+    "itching": "itching",
+    "skin irritation": "itching",
+    "hives": "skin_rash",
+    "acne": "acne",
+    "pimples": "acne",
+    "swelling": "swelling",
+    "bruising": "bruising",
+    "bleeding": "bleeding",
+    "cuts": "wound",
+    "wound": "wound",
+    "burn": "burn",
+    "sunburn": "burn",
+    "frequent urination": "urinary_frequency",
+    "burning urination": "urinary_pain",
+    "painful urination": "urinary_pain",
+    "blood in urine": "hematuria",
+    "menstrual pain": "menstrual_cramps",
+    "period cramps": "menstrual_cramps",
+    "missed period": "amenorrhea",
+    "vaginal discharge": "vaginal_discharge",
+    "loss of appetite": "loss_of_appetite",
+    "poor appetite": "loss_of_appetite",
+    "weight loss": "weight_loss",
+    "weight gain": "weight_gain",
+    "anxiety": "anxiety",
+    "stress": "stress",
+    "insomnia": "insomnia",
+    "trouble sleeping": "insomnia",
+    "depression": "depression"
 }
+
+
 
 def extract_symptoms(user_input, all_symptoms):
     extracted = []
@@ -102,7 +175,12 @@ quotes = [
     "💪 A healthy outside starts from the inside.",
     "☀️ Every day is a chance to get stronger and healthier.",
     "🌿 Take a deep breath, your health matters the most.",
-    "🌺 Remember, self-care is not selfish."
+    "🌺 Remember, self-care is not selfish.",
+    "🍎 Take care of your body — it’s the only place you have to live.",
+    "🧘‍♀️ Balance is not something you find, it’s something you create.",
+    "🚶‍♂️ Small steps every day lead to big changes over time.",
+    "🌻 Nourish your body, calm your mind, and feed your soul.",
+    "💧 Drink water, stay positive, and keep moving forward."
 ]
 
 # ------------------ State Machine ------------------
@@ -131,25 +209,28 @@ def chat():
     step = session.get('step', 'welcome')
 
     # replicate each console step
-    if step == 'welcome':
+    
+    greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening','morning','afternoon','evening']
+    if step == 'welcome' or any(greet in user_msg for greet in greetings):
         session['step'] = 'name'
-        return jsonify(reply="✨ DOC_AI to HealthCare ChatBot!\n➡️ What is your name?")
+        return jsonify(reply="👋 Hello! I’m DOC_AI, your healthcare assistant.\n✨ Welcome to the HealthCare ChatBot!\n➡️ What is your name?")
+
     elif step == 'name':
         session['name'] = user_msg
         session['step'] = 'age'
-        return jsonify(reply="➡️ Please enter your age:")
+        return jsonify(reply=f"➡️ Please {session['name']} enter your age:")
     elif step == 'age':
         session['age'] = user_msg
         session['step'] = 'gender'
-        return jsonify(reply="➡️ What is your gender? (M/F/Other):")
+        return jsonify(reply=f"➡️ What is your gender, {session['name']}?\n (Male/Female/Other):")
     elif step == 'gender':
         session['gender'] = user_msg
         session['step'] = 'symptoms'
-        return jsonify(reply="➡️ Describe your symptoms in a sentence:")
+        return jsonify(reply=f"➡️ Please {session['name']} Describe your symptoms in a sentence, :")
     elif step == 'symptoms':
         symptoms_list = extract_symptoms(user_msg, cols)
         if not symptoms_list:
-            return jsonify(reply="❌ Could not detect valid symptoms. Please describe again:")
+            return jsonify(reply="❌ Could not detect valid symptoms from your description. Please describe again:")
         session['symptoms'] = symptoms_list
         disease, conf, _ = predict_disease(symptoms_list)
         session['pred_disease'] = disease
@@ -162,7 +243,7 @@ def chat():
     elif step == 'severity':
         session['severity'] = user_msg
         session['step'] = 'preexist'
-        return jsonify(reply="➡️ Do you have any pre-existing conditions?")
+        return jsonify(reply="➡️ Do you have any pre-existing conditions ?")
     elif step == 'preexist':
         session['preexist'] = user_msg
         session['step'] = 'lifestyle'
@@ -209,13 +290,31 @@ def final_prediction():
     about = description_list.get(disease, 'No description available.')
     precautions = precautionDictionary.get(disease, [])
     text = (f"                        Result                            \n"
-            f"\n🩺 Based on your answers, you may have **{disease}**\n"
-            f"\n🔎 Confidence: {conf}%\n📖 About: {about}\n")
+            f"\n🩺 Based on the symptoms you you have provided you are likely suffering from, **{disease}**\n")
+            
     if precautions:
-        text += "\n\n🛡️ Suggested precautions:\n" + "\n\n".join(f"{i+1}. {p}" for i,p in enumerate(precautions))
+        text += "\n\nThis are the suggested precautions:\n" + "\n\n".join(f"{i+1}. {p}" for i,p in enumerate(precautions))
     text += "\n\n\n💡 " + random.choice(quotes)
     text += f"\n\n\nThank you for using the chatbot. Wishing you good health, {session['name']}!"
     return jsonify(reply=text)
+def process_message(self, user_input):
+        """Process user message and return (response, end_of_chat: bool)"""
+        user_input = user_input.strip().lower()
+
+        # ---------------- SMALL TALK HANDLING ----------------
+        # Only treat short messages as greetings/thanks/farewells
+        farewells = ['bye', 'goodbye', 'see you', 'take care', 'farewell', 'later', 'see ya', 'catch you later', 'talk to you later', 'i am leaving', 'i have to go', 'got to go', 'see you later', 'bye bye', 'see ya later']
+        thanks = ['thank you', 'thanks', 'thx', 'thank you very much']
+
+        if len(user_input.split()) <= 3:
+            if any(farewell in user_input for farewell in farewells):
+                return "👋 Goodbye! Take care!", True
+            if any(thank in user_input for thank in thanks):
+                return "😊 You're welcome! If you have more questions, feel free to ask.", False
+
+        # not a short small-talk message; continue normal processing
+        return None, False
+
 # ------------------ Run App ------------------
 if __name__ == "__main__":
     app.run(debug=True)
