@@ -239,7 +239,7 @@ def chat():
     elif step == 'days':
         session['days'] = user_msg
         session['step'] = 'severity'
-        return jsonify(reply="➡️ On a scale of 1–10, how severe is your condition?")
+        return jsonify(reply=f"➡️ Sorry, to hear that {session['name']}, on a scale of 1–10, how severe is your condition?")
     elif step == 'severity':
         session['severity'] = user_msg
         session['step'] = 'preexist'
@@ -280,7 +280,7 @@ def ask_next_symptom():
     if i < min(8, len(ds)):
         sym = ds[i]
         session['ask_index'] += 1
-        return jsonify(reply=f"➡️ Do you also have {sym.replace('_',' ')}? (yes/no):")
+        return jsonify(reply=f"➡️ Do you have severe {sym.replace('_',' ')}? (yes/no):")
     else:
         session['step'] = 'final'
         return final_prediction()
