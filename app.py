@@ -55,32 +55,10 @@ symptom_synonyms = {
     "cramps": "stomach_pain","stomach cramps": "stomach_pain","bloating": "stomach_pain","nausea": "nausea","vomiting": "vomiting","throwing up": "vomiting",
     "feeling sick": "nausea","diarrhea": "diarrhea","loose motion": "diarrhea","motions": "diarrhea","loose stool": "diarrhea","constipation": "constipation",
     "difficulty passing stool": "constipation","heartburn": "acid_reflux","acid reflux": "acid_reflux","indigestion": "acid_reflux",
-    "high temperature": "fever",
-    "temperature": "fever",
-    "feaver": "fever",
-    "feverish": "fever",
-    "chills": "chills",
-    "cold": "chills",
-    "flu": "influenza",
-    "influenza": "influenza",
-    "cough": "cough",
-    "coughing": "cough",
-    "dry cough": "cough",
-    "wet cough": "cough",
-    "throat pain": "sore_throat",
-    "sore throat": "sore_throat",
-    "throat irritation": "sore_throat",
-    "breathing issue": "breathlessness",
-    "shortness of breath": "breathlessness",
-    "difficulty breathing": "breathlessness",
-    "wheezing": "breathlessness",
-    "runny nose": "runny_nose",
-    "stuffy nose": "nasal_congestion",
-    "blocked nose": "nasal_congestion",
-    "sneezing": "sneezing",
-    "sinus pain": "sinusitis",
-    "sinus pressure": "sinusitis",
-    "nose bleed": "nosebleed",
+    "high temperature": "fever","temperature": "fever","feaver": "fever","feverish": "fever","chills": "chills","cold": "chills","flu": "influenza","influenza": "influenza",
+    "cough": "cough","coughing": "cough","dry cough": "cough","wet cough": "cough","throat pain": "sore_throat","sore throat": "sore_throat","throat irritation": "sore_throat",
+    "breathing issue": "breathlessness","shortness of breath": "breathlessness","difficulty breathing": "breathlessness","wheezing": "breathlessness","runny nose": "runny_nose",
+    "stuffy nose": "nasal_congestion","blocked nose": "nasal_congestion","sneezing": "sneezing","sinus pain": "sinusitis","sinus pressure": "sinusitis","nose bleed": "nosebleed",
     "body ache": "muscle_pain",
     "body pain": "muscle_pain",
     "muscle ache": "muscle_pain",
@@ -220,17 +198,30 @@ def chat():
         session['step'] = 'age'
         return jsonify(reply=f"🥼 Please {session['name']} enter your age:")
     elif step == 'age':
-        session['age'] = user_msg
+        try:
+            age = int(user_msg)
+            if age <= 0 or age > 120:
+                return jsonify(reply="⚠️ Please enter a valid age between 1 and 120:")
+            session['age'] = age
+        except ValueError:
+            return jsonify(reply="⚠️ Age must be a number, please try again.")
+        
         session['step'] = 'gender'
-        return jsonify(reply=f"🥼 What is your gender, ?\n (Male/Female/Other):")
+        return jsonify(reply=f"🥼 What is your gender, {session['name']}?\n (Male/Female/Other):")
     elif step == 'gender':
-        session['gender'] = user_msg
+        try:
+            gender = user_msg.strip().lower()
+            if gender not in ['male', 'female', 'other', 'm', 'f', 'o']:
+                return jsonify(reply="⚠️ Please enter Male, Female, or Other:")
+            session['gender'] = gender
+        except ValueError:
+            return jsonify(reply="⚠️ Invalid input, please try again.")
         session['step'] = 'symptoms'
         return jsonify(reply=f"🥼 Please {session['name']} Describe your symptoms in a sentence, :")
     elif step == 'symptoms':
         symptoms_list = extract_symptoms(user_msg, cols)
         if not symptoms_list:
-            return jsonify(reply="❌ Could not detect valid symptoms from your description. Please describe again:")
+            return jsonify(reply="Sorry the symptoms you entered are beyond my capabilities. Please describe again:")
         session['symptoms'] = symptoms_list
         disease, conf, _ = predict_disease(symptoms_list)
         session['pred_disease'] = disease
