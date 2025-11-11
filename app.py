@@ -35,18 +35,27 @@ symptoms_dict = {symptom: idx for idx, symptom in enumerate(x)}
 def getDescription():
     with open("symptom_Description.csv") as csv_file:
         for row in csv.reader(csv_file):
-            description_list[row[0]] = row[1]
+            if len(row) < 2:
+                continue  # skip empty/malformed lines
+            description_list[row[0].strip()] = row[1].strip()
 
 def getSeverityDict():
-    with open ("Symptom_severity.csv") as csv_file:
+    with open("Symptom_severity.csv") as csv_file:
         for row in csv.reader(csv_file):
-            try: severityDictionary[row[0]] = int(row[1])
-            except: pass
+            if len(row) < 2:
+                continue
+            try:
+                severityDictionary[row[0].strip()] = int(row[1])
+            except ValueError:
+                pass
 
 def getprecautionDict():
     with open("symptom_precaution.csv") as csv_file:
         for row in csv.reader(csv_file):
-            precautionDictionary[row[0]] = [row[1], row[2], row[3], row[4]]
+            if len(row) < 5:
+                continue
+            precautionDictionary[row[0].strip()] = [row[1], row[2], row[3], row[4]]
+
 
 getSeverityDict(); getDescription(); getprecautionDict()
 
@@ -59,64 +68,15 @@ symptom_synonyms = {
     "cough": "cough","coughing": "cough","dry cough": "cough","wet cough": "cough","throat pain": "sore_throat","sore throat": "sore_throat","throat irritation": "sore_throat",
     "breathing issue": "breathlessness","shortness of breath": "breathlessness","difficulty breathing": "breathlessness","wheezing": "breathlessness","runny nose": "runny_nose",
     "stuffy nose": "nasal_congestion","blocked nose": "nasal_congestion","sneezing": "sneezing","sinus pain": "sinusitis","sinus pressure": "sinusitis","nose bleed": "nosebleed",
-    "body ache": "muscle_pain",
-    "body pain": "muscle_pain",
-    "muscle ache": "muscle_pain",
-    "joint pain": "joint_pain",
-    "leg pain": "joint_pain",
-    "arm pain": "joint_pain",
-    "back pain": "back_pain",
-    "lower back pain": "back_pain",
-    "neck pain": "neck_pain",
-    "fatigue": "fatigue",
-    "tiredness": "fatigue",
-    "weakness": "fatigue",
-    "diziness": "dizziness",
-    "lightheaded": "dizziness",
-    "fainting": "fainting",
-    "loss of consciousness": "fainting",
-    "sweating": "sweating",
-    "shivering": "chills",
-    "headache": "headache",
-    "migraine": "headache",
-    "head pain": "headache",
-    "eye pain": "eye_pain",
-    "eye strain": "eye_pain",
-    "blurred vision": "blurred_vision",
-    "double vision": "blurred_vision",
-    "drowsiness": "drowsiness",
-    "confusion": "confusion",
-    "memory loss": "memory_loss",
-    "rash": "skin_rash",
-    "itching": "itching",
-    "skin irritation": "itching",
-    "hives": "skin_rash",
-    "acne": "acne",
-    "pimples": "acne",
-    "swelling": "swelling",
-    "bruising": "bruising",
-    "bleeding": "bleeding",
-    "cuts": "wound",
-    "wound": "wound",
-    "burn": "burn",
-    "sunburn": "burn",
-    "frequent urination": "urinary_frequency",
-    "burning urination": "urinary_pain",
-    "painful urination": "urinary_pain",
-    "blood in urine": "hematuria",
-    "menstrual pain": "menstrual_cramps",
-    "period cramps": "menstrual_cramps",
-    "missed period": "amenorrhea",
-    "vaginal discharge": "vaginal_discharge",
-    "loss of appetite": "loss_of_appetite",
-    "poor appetite": "loss_of_appetite",
-    "weight loss": "weight_loss",
-    "weight gain": "weight_gain",
-    "anxiety": "anxiety",
-    "stress": "stress",
-    "insomnia": "insomnia",
-    "trouble sleeping": "insomnia",
-    "depression": "depression"
+    "body ache": "muscle_pain","body pain": "muscle_pain","muscle ache": "muscle_pain","joint pain": "joint_pain","leg pain": "joint_pain", "arm pain": "joint_pain",    "back pain": "back_pain","lower back pain": "back_pain",
+    "neck pain": "neck_pain","fatigue": "fatigue","tiredness": "fatigue","weakness": "fatigue","diziness": "dizziness","lightheaded": "dizziness","fainting": "fainting",
+    "loss of consciousness": "fainting","sweating": "sweating","shivering": "chills","headache": "headache","migraine": "headache","head pain": "headache","eye pain": "eye_pain",
+    "eye strain": "eye_pain","blurred vision": "blurred_vision","double vision": "blurred_vision","drowsiness": "drowsiness","confusion": "confusion","memory loss": "memory_loss",
+    "rash": "skin_rash","itching": "itching","skin irritation": "itching","hives": "skin_rash","acne": "acne","pimples": "acne","swelling": "swelling","bruising": "bruising",
+    "bleeding": "bleeding","cuts": "wound","wound": "wound","burn": "burn","sunburn": "burn","frequent urination": "urinary_frequency","burning urination": "urinary_pain",
+    "painful urination": "urinary_pain","blood in urine": "hematuria","menstrual pain": "menstrual_cramps","period cramps": "menstrual_cramps","missed period": "amenorrhea",
+    "vaginal discharge": "vaginal_discharge","loss of appetite": "loss_of_appetite","poor appetite": "loss_of_appetite","weight loss": "weight_loss","weight gain": "weight_gain",
+    "anxiety": "anxiety","stress": "stress","insomnia": "insomnia","trouble sleeping": "insomnia","depression": "depression"
 }
 
 
@@ -191,7 +151,7 @@ def chat():
     greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening','morning','afternoon','evening']
     if step == 'welcome' or any(greet in user_msg for greet in greetings):
         session['step'] = 'name'
-        return jsonify(reply="👋 Hello! I’m DOC_AI, your healthcare assistant.\n✨ Welcome to the HealthCare ChatBot!\n➡️ What is your name?")
+        return jsonify(reply="👋 Hello! I’m DR_AI, your healthcare assistant.\n✨ Welcome to the HealthCare ChatBot!\n➡️ What is your name?")
 
     elif step == 'name':
         session['name'] = user_msg
