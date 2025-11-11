@@ -13,7 +13,7 @@
     }
 
     header {
-      background: linear-gradient(135deg, #1aa0faff, #1aa0faff);
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
       color: white;
       text-align: center;
       padding: 20px;
@@ -29,7 +29,7 @@
     }
 
     h2 {
-      color: #1aa0faff;
+      color: #2e7d32;
       margin-bottom: 10px;
     }
 
@@ -47,89 +47,7 @@
       width: 100%;
     }
 
-    button {
-      background: #09a149ff;
-      color: white;
-      border: none;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background: #15a5e7ff;
-      transform: scale(1.05);
-    }
-
-    .hospital-btn {
-      background: #2196F3;
-      margin-top: 20px;
-    }
-
-    .hospital-btn:hover {
-      background: #1976D2;
-    }
-
-    #hospital-results {
-      margin-top: 20px;
-      padding: 15px;
-      background: #e8f5e9;
-      border-radius: 8px;
-      display: none;
-    }
-
-    #hospital-results.show {
-      display: block;
-    }
-
-    .hospital-item {
-      background: white;
-      padding: 10px;
-      margin: 10px 0;
-      border-left: 4px solid #2196F3;
-      border-radius: 4px;
-    }
-
-    .hospital-item h4 {
-      margin: 5px 0;
-      color: #2196F3;
-    }
-
-    .hospital-item p {
-      margin: 3px 0;
-      font-size: 14px;
-    }
-
-    .loading {
-      text-align: center;
-      color: #1aa0faff;
-      font-weight: bold;
-    }
-
-    .error {
-      color: #d32f2f;
-      padding: 10px;
-      background: #ffebee;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-
-    a.back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      text-decoration: none;
-      background: #1aa0faff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    a.back-btn:hover {
-      background: #1aa0faff;
-    }
+    
   </style>
 </head>
 <body>
@@ -139,11 +57,6 @@
 
   </header>
 
-  <button class="hospital-btn" onclick="findNearbyHospitals()">🌐 Find Hospitals Near Me</button>
-    
-    <div id="hospital-results">
-      <div id="hospital-content"></div>
-    </div>
   <main>
     
     <h2>Need help or have feedback?</h2>
@@ -164,142 +77,7 @@
 
   </main>
 
-<script>
-  async function findNearbyHospitals() {
-    const resultsDiv = document.getElementById('hospital-results');
-    const contentDiv = document.getElementById('hospital-content');
 
-    if (!navigator.geolocation) {
-      contentDiv.innerHTML = '<div class="error">Geolocation is not supported by your browser.</div>';
-      resultsDiv.classList.add('show');
-      return;
-    }
-
-    contentDiv.innerHTML = '<div class="loading">📍 Getting your location...</div>';
-    resultsDiv.classList.add('show');
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        searchHospitals(lat, lng);
-      },
-      (error) => {
-        let errorMsg = 'Unable to get your location. ';
-        if (error.code === error.PERMISSION_DENIED) {
-          errorMsg += 'Please enable location access in your browser settings.';
-        } else if (error.code === error.POSITION_UNAVAILABLE) {
-          errorMsg += 'Location information is unavailable.';
-        } else if (error.code === error.TIMEOUT) {
-          errorMsg += 'Location request timed out.';
-        }
-        contentDiv.innerHTML = `<div class="error">${errorMsg}</div>`;
-      }
-    );
-  }
-
-  async function searchHospitals(lat, lng) {
-    const contentDiv = document.getElementById('hospital-content');
-    const query = `
-      [out:json][timeout:25];
-      (
-        node["amenity"="hospital"](around:5000,${lat},${lng});
-        way["amenity"="hospital"](around:5000,${lat},${lng});
-        relation["amenity"="hospital"](around:5000,${lat},${lng});
-      );
-      out center;
-    `;
-
-    const endpoints = [
-      'https://overpass-api.de/api/interpreter',
-      'https://overpass.kumi.systems/api/interpreter',
-      'https://overpass.openstreetmap.ru/api/interpreter'
-    ];
-
-    let success = false;
-    let data = null;
-
-    for (const endpoint of endpoints) {
-      try {
-        contentDiv.innerHTML = `<div class="loading">🌐 Searching nearby hospitals (via ${endpoint})...</div>`;
-        const response = await fetch(`${endpoint}?data=${encodeURIComponent(query)}`);
-        const text = await response.text();
-
-        if (text.trim().startsWith('<')) {
-          console.warn(`⚠️ ${endpoint} returned HTML, skipping...`);
-          continue; // try next endpoint
-        }
-
-        data = JSON.parse(text);
-        success = true;
-        break; // valid JSON received
-      } catch (err) {
-        console.warn(`❌ Failed to fetch from ${endpoint}:`, err);
-      }
-    }
-
-    if (!success) {
-      contentDiv.innerHTML = `
-        <div class="error">
-          ⚠️ All Overpass servers are busy or rate-limited.<br>
-          Please try again in a few minutes.
-        </div>`;
-      return;
-    }
-
-    displayHospitals(data, lat, lng);
-  }
-
-  function displayHospitals(data, userLat, userLng) {
-    const contentDiv = document.getElementById('hospital-content');
-
-    if (!data.elements || data.elements.length === 0) {
-      contentDiv.innerHTML = '<div class="error">No hospitals found nearby. Try zooming out or moving to a different area.</div>';
-      return;
-    }
-
-    const hospitals = data.elements.map(el => {
-      const lat = el.lat || el.center?.lat;
-      const lng = el.lon || el.center?.lon;
-      const distance = calculateDistance(userLat, userLng, lat, lng);
-      return {
-        name: el.tags?.name || 'Unknown Hospital',
-        lat, lng, distance,
-        address: el.tags?.['addr:street'] || 'Address not available',
-        phone: el.tags?.['contact:phone'] || '',
-        website: el.tags?.['contact:website'] || ''
-      };
-    });
-
-    hospitals.sort((a, b) => a.distance - b.distance);
-
-    let html = '<h3>🌐 Hospitals Near You:</h3>';
-    hospitals.slice(0, 5).forEach((h, i) => {
-      const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(h.name)}/@${h.lat},${h.lng},15z`;
-      html += `
-        <div class="hospital-item">
-          <h4>${i + 1}. ${h.name}</h4>
-          <p><strong>Distance:</strong> ${h.distance.toFixed(2)} km away</p>
-          <p><strong>Address:</strong> ${h.address}</p>
-          ${h.phone ? `<p><strong>Phone:</strong> ${h.phone}</p>` : ''}
-          <a href="${mapsUrl}" target="_blank" style="color:#2196F3;text-decoration:none;">📍 View on Google Maps</a>
-        </div>`;
-    });
-
-    contentDiv.innerHTML = html;
-  }
-
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) ** 2 +
-              Math.cos(lat1 * Math.PI / 180) *
-              Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  }
-</script>
 
 
 </body>
