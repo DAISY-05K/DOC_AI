@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Support - DR_AI Chatbot</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f6f9f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact & Support</h1>
+
+
+  </header>
+
+  <main>
+    
+    <h2>Need help or have feedback?</h2>
+    <p>
+      Fill out the form below and our support team will get back to you soon.  
+      You can also reach us at <b>support@docai.com</b>.
+    </p>
+
+    <form action="#" method="post">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p>For more information, visit: <a href="https://www.nhs.uk/conditions/" target="_blank">NHS Conditions</a></p>
+    <a href="{{ url_for('home') }}" class="back-btn">⬅ Back to Home</a>
+
+  </main>
+
+
+
+
+</body>
+</html>

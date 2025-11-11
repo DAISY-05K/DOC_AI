@@ -24,11 +24,16 @@
 <div class="about-link">
   <a href="{{ url_for('about') }}"><button>About DR_AI Chatbot</button></a>
 
-</div>   
+</div>
 
 <!-- Contact And Support page -->
 <div class="Support-link">
   <a href="{{ url_for('support') }}"><button>Contact And Support</button></a>
+
+</div>
+
+<div class="Location-link">
+  <a href="{{ url_for('location') }}"><button>Hospital Locations</button></a>
 </div>
 
  <div class="disclaimer">
@@ -38,11 +43,14 @@
 
 
 
+
+
+
 </body>
 </html>
 <head>
   <style>
-  
+    <style>
 .about-link, .Support-link {
   text-align: center;
   margin: 80px 40px 20px 40px; 
@@ -51,7 +59,7 @@
 }
 
 .about-link button, .Support-link button {
-  background: linear-gradient(135deg, #1aa0faff, #1aa0faff);
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -65,7 +73,7 @@
 
 .about-link button:hover, .Support-link button:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #1aa0faff, #1aa0faff);
+  background: linear-gradient(135deg, #66bb6a, #388e3c);
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
@@ -78,7 +86,7 @@
 
 button {
       background: #4caf50;
-      margin
+      margin-top: 20px;
       color: white;
       border: none;
       padding: 12px;
@@ -89,7 +97,7 @@ button {
     }
 
     button:hover {
-      background: #1aa0faff;
+      background: #388e3c;
       transform: scale(1.05);
     }
 
@@ -134,7 +142,7 @@ button {
 
     .loading {
       text-align: center;
-      color: #1aa0faff;
+      color: #2e7d32;
       font-weight: bold;
     }
 
@@ -150,7 +158,7 @@ button {
       display: inline-block;
       margin-top: 20px;
       text-decoration: none;
-      background: #1aa0faff;
+      background: #4caf50;
       color: white;
       padding: 10px 20px;
       border-radius: 8px;
@@ -158,7 +166,7 @@ button {
     }
 
     a.back-btn:hover {
-      background: #1aa0faff;
+      background: #388e3c;
     }
 
 </style>

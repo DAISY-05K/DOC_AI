@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About DR_AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header style="background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff;padding:20px;text-align:center;">
+    <h1>About DR_AI Chatbot</h1>
+  </header>
+  <main style="max-width:800px;margin:30px auto;padding:20px;background:#fff;border-radius:8px;">
+    <p>DR_AI is a simple symptom-based diagnostic chatbot intended for educational purposes. It helps identify likely conditions based on symptoms and suggests basic precautions. It is not a substitute for professional medical advice.</p>
+    <p>For more information or to report issues, please contact <b>support@docai.com</b>.</p>
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+  </main>
+</body>
+</html>
