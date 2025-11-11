@@ -135,7 +135,7 @@ def about():
 def support():
     return render_template('support.html')
 
-@app.route('/')
+@app.route('/index')
 def index():
     session.clear()
     session['step'] = 'welcome'
