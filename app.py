@@ -129,11 +129,14 @@ def home():
 
 @app.route('/about')
 def about():
+    # Render the about page (create templates/about.html if missing)
     return render_template('about.html')
 
 @app.route('/support')
 def support():
-    return render_template('support.html')
+    # Support template file is `Support.html` in the templates directory.
+    # Use the exact filename to avoid TemplateNotFound on case-sensitive filesystems.
+    return render_template('Support.html')
 
 @app.route('/index')
 def index():
@@ -143,7 +146,14 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user_msg = request.json['message']
+    try:
+        data = request.get_json(force=True, silent=True)
+        if not data or 'message' not in data:
+            return jsonify(reply="Invalid request: expected JSON {message: '...'}"), 400
+        user_msg = data['message']
+    except Exception as e:
+        app.logger.exception('Error parsing request JSON')
+        return jsonify(reply='Server error parsing request'), 500
     step = session.get('step', 'welcome')
 
     # replicate each console step
@@ -224,6 +234,9 @@ def chat():
     elif step == 'final':
         # already answered all guided
         return final_prediction()
+
+    # If no branch matched, return an informative message
+    return jsonify(reply="I'm sorry, I couldn't process that. Please try again."), 400
 
 def ask_next_symptom():
     i = session['ask_index']
